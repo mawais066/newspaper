@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: awaisnews
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: NEWS_API_KEY
+        value: 4a600ef880d64ccdb16fdbacf568a1a3
+      - key: AI_MODEL
+        value: Qwen/Qwen3.8-Flash-Next
