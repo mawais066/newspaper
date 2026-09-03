@@ -213,7 +213,7 @@ const NewsEngine = (function() {
 
     for (const ep of backendEndpoints) {
       try {
-        const resp = await fetchWithTimeout(ep, 2000);
+        const resp = await fetchWithTimeout(ep, 6000);
         if (resp.ok) {
           const data = await resp.json();
           if (data && data.articles && data.articles.length > 0) {
