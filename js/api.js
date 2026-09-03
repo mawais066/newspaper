@@ -195,19 +195,20 @@ const NewsEngine = (function() {
   /**
    * Main Fetcher: Multi-tier strategy (Python Backend -> Live Multi-Proxy RSS -> Dynamic Specialized Feeds -> Contextual Live Wire)
    */
-  async function fetchNews({ category = 'general', query = '', country = 'global', sortBy = 'publishedAt' } = {}) {
+  async function fetchNews({ category = 'general', query = '', country = 'global', sortBy = 'publishedAt', forceRefresh = false } = {}) {
     const cInfo = COUNTRY_MAP[country] || { name: country, flag: '🌐', query: country };
     const cleanQuery = (query || '').trim();
     const isCricketQuery = /cricket|match|babar|psl|ipl|t20|odi|test|wicket|batsman|bowler|pcb|bcci|cric/i.test(cleanQuery || category);
+    const timeBuster = `&_t=${Date.now()}${forceRefresh ? '&refresh=true' : ''}`;
 
     // 1. Try Python Backend Server first (/api/news or /api/news/search)
     const backendEndpoints = [];
     if (cleanQuery) {
-      backendEndpoints.push(`/api/news/search?q=${encodeURIComponent(cleanQuery)}&sortBy=${sortBy}`);
-      backendEndpoints.push(`http://localhost:8000/api/news/search?q=${encodeURIComponent(cleanQuery)}&sortBy=${sortBy}`);
+      backendEndpoints.push(`/api/news/search?q=${encodeURIComponent(cleanQuery)}&sortBy=${sortBy}${timeBuster}`);
+      backendEndpoints.push(`http://localhost:8000/api/news/search?q=${encodeURIComponent(cleanQuery)}&sortBy=${sortBy}${timeBuster}`);
     } else {
-      backendEndpoints.push(`/api/news?category=${category}&country=${country}&sortBy=${sortBy}`);
-      backendEndpoints.push(`http://localhost:8000/api/news?category=${category}&country=${country}&sortBy=${sortBy}`);
+      backendEndpoints.push(`/api/news?category=${category}&country=${country}&sortBy=${sortBy}${timeBuster}`);
+      backendEndpoints.push(`http://localhost:8000/api/news?category=${category}&country=${country}&sortBy=${sortBy}${timeBuster}`);
     }
 
     for (const ep of backendEndpoints) {

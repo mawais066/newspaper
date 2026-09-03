@@ -105,12 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
     bindEvents();
     loadNews();
 
-    // Real-Time Auto-Refresh: Poll for fresh breaking stories every 45 seconds
+    // Real-Time Auto-Refresh: Poll for fresh breaking stories every 30 seconds
     state.autoRefreshTimer = setInterval(() => {
       if (!document.hidden && !state.searchQuery) {
-        loadNews(false, true);
+        loadNews(true, true);
       }
-    }, 45000);
+    }, 30000);
 
     if (DOM.footerYear) {
       DOM.footerYear.textContent = new Date().getFullYear();
