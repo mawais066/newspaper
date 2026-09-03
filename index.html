@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AwaisNews — Premier Global Digital Newspaper</title>
+  <meta name="description"
+    content="AwaisNews: Real-time global journalism, breaking news, and intelligent editorial analysis and audio digests.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="live-pulse"><i class="fa-solid fa-circle"></i> LIVE EDITION</span>
+        <span class="date-time" id="current-date-time"><i class="fa-regular fa-calendar"></i> Loading...</span>
+        <span class="weather-pill" id="weather-pill"><i class="fa-solid fa-cloud-sun"></i> Global 24°C • Clear</span>
+      </div>
+      <div class="top-bar-center">
+        <span class="ai-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI-Augmented Editorial Desk</span>
+      </div>
+      <div class="top-bar-right">
+        <button class="top-btn" id="btn-morning-digest" title="AI Morning Briefing">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Morning Briefing
+        </button>
+        <button class="top-btn" id="btn-bookmarks-view" title="Saved Articles">
+          <i class="fa-solid fa-bookmark"></i> Saved (<span id="bookmark-count">0</span>)
+        </button>
+        <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Light/Dark Theme">
+          <i class="fa-solid fa-sun" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Ticker Ribbon -->
+  <div class="ticker-ribbon">
+    <div class="container ribbon-inner">
+      <div class="ribbon-label">MARKETS & TRENDS</div>
+      <div class="ticker-marquee-wrap">
+        <div class="ticker-marquee" id="market-marquee">
+          <span><strong>S&P 500</strong> 5,982.12 <span class="trend-up">+0.42% <i
+                class="fa-solid fa-arrow-trend-up"></i></span></span>
+          <span><strong>NASDAQ</strong> 19,124.60 <span class="trend-up">+0.85% <i
+                class="fa-solid fa-arrow-trend-up"></i></span></span>
+          <span><strong>BTC/USD</strong> $91,420 <span class="trend-up">+3.14% <i
+                class="fa-solid fa-arrow-trend-up"></i></span></span>
+          <span><strong>OIL (BRENT)</strong> $74.30 <span class="trend-down">-0.65% <i
+                class="fa-solid fa-arrow-trend-down"></i></span></span>
+          <span><strong>GLOBAL MARKETS</strong> ACTIVE <span class="trend-ai">BULLISH <i
+                class="fa-solid fa-bolt"></i></span></span>
+          <span><strong>GOLD</strong> $2,710.50 <span class="trend-up">+0.18% <i
+                class="fa-solid fa-arrow-trend-up"></i></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Newspaper Header & Masthead -->
+  <header class="newspaper-header">
+    <div class="container">
+      <div class="masthead-top">
+        <div class="edition-tag">INTERNATIONAL & INTELLIGENT JOURNALISM</div>
+        <div class="motto">"Truth in Reporting, Clarity Through Intelligent Journalism"</div>
+        <div class="newspaper-meta">VOL. CXXIV • NO. 42 • DIGITAL EDITION</div>
+      </div>
+
+      <div class="masthead-main">
+        <a href="#" class="logo-link" id="logo-refresh">
+          <h1 class="newspaper-title">AWAIS<span>NEWS</span></h1>
+        </a>
+        <p class="tagline">The Premier AI-Augmented Daily Newspaper</p>
+      </div>
+
+      <!-- Breaking News Bar -->
+      <div class="breaking-banner" id="breaking-banner">
+        <span class="breaking-badge"><i class="fa-solid fa-bolt"></i> BREAKING</span>
+        <div class="breaking-content" id="breaking-content">
+          <a href="#" id="breaking-link">Live Global Feeds synchronized on AwaisNews network.</a>
+        </div>
+        <div class="breaking-controls">
+          <button id="prev-breaking" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="next-breaking" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Navigation & Category Bar -->
+      <nav class="category-nav">
+        <div class="nav-scroll-container">
+          <button class="nav-item active" data-category="general" data-country="global"><i class="fa-solid fa-globe"></i> Front Page</button>
+          <button class="nav-item" data-category="technology"><i class="fa-solid fa-microchip"></i> Technology &
+            AI</button>
+          <button class="nav-item" data-category="business"><i class="fa-solid fa-chart-line"></i> Business &
+            Finance</button>
+          <button class="nav-item" data-category="world"><i class="fa-solid fa-earth-americas"></i> World</button>
+          <button class="nav-item" data-category="science"><i class="fa-solid fa-atom"></i> Science & Space</button>
+          <button class="nav-item" data-category="sports"><i class="fa-solid fa-futbol"></i> Sports</button>
+          <button class="nav-item" data-category="entertainment"><i class="fa-solid fa-film"></i> Culture &
+            Arts</button>
+          <button class="nav-item" data-category="health"><i class="fa-solid fa-heart-pulse"></i> Health</button>
+        </div>
+
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="search-input" placeholder="Search cricket match, Pakistan, global topics, or any country...">
+          <button id="search-clear-btn" class="hidden"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Newspaper Content -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Current View Header / Filters -->
+      <div class="section-title-bar">
+        <div class="section-title-left">
+          <h2 id="current-section-title">Today's Headlines & Front Page</h2>
+          <span class="active-badge" id="source-status"><i class="fa-solid fa-satellite-dish"></i> Live Stream</span>
+        </div>
+        <div class="section-filters">
+          <select id="country-select" class="filter-select" title="Select Country / Region">
+            <option value="global" selected>🌐 Global (All Sources)</option>
+            <option value="pk">🇵🇰 Pakistan (PK)</option>
+            <option value="sa">🇸🇦 Saudi Arabia (SA)</option>
+            <option value="ae">🇦🇪 UAE / Dubai (AE)</option>
+            <option value="us">🇺🇸 United States (US)</option>
+            <option value="gb">🇬🇧 United Kingdom (UK)</option>
+            <option value="tr">🇹🇷 Turkey (TR)</option>
+            <option value="in">🇮🇳 India (IN)</option>
+            <option value="ca">🇨🇦 Canada (CA)</option>
+            <option value="au">🇦🇺 Australia (AU)</option>
+            <option value="ps">🇵🇸 Palestine / Mideast (PS)</option>
+            <option value="qa">🇶🇦 Qatar (QA)</option>
+            <option value="de">🇩🇪 Germany (DE)</option>
+            <option value="fr">🇫🇷 France (FR)</option>
+            <option value="cn">🇨🇳 China (CN)</option>
+            <option value="jp">🇯🇵 Japan (JP)</option>
+            <option value="ru">🇷🇺 Russia (RU)</option>
+            <option value="eg">🇪🇬 Egypt (EG)</option>
+            <option value="my">🇲🇾 Malaysia (MY)</option>
+            <option value="id">🇮🇩 Indonesia (ID)</option>
+            <option value="bd">🇧🇩 Bangladesh (BD)</option>
+            <option value="za">🇿🇦 South Africa (ZA)</option>
+            <option value="it">🇮🇹 Italy (IT)</option>
+            <option value="es">🇪🇸 Spain (ES)</option>
+            <option value="br">🇧🇷 Brazil (BR)</option>
+          </select>
+          <select id="sort-select" class="filter-select" title="Sort Order">
+            <option value="publishedAt">Latest First</option>
+            <option value="relevancy">Most Relevant</option>
+            <option value="popularity">Trending / Viral</option>
+          </select>
+          <button id="refresh-news-btn" class="action-icon-btn" title="Refresh Live Feed">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Lead Cover Story Layout -->
+      <section class="hero-editorial" id="hero-editorial">
+        <div class="hero-skeleton">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-text"></div>
+        </div>
+      </section>
+
+      <!-- Multi-Column Editorial Grid -->
+      <div class="newspaper-layout-grid">
+        <!-- Left 2-Columns: Main News Feed -->
+        <section class="primary-feed-column">
+          <div class="sub-header">
+            <h3><i class="fa-solid fa-newspaper"></i> In-Depth Coverage</h3>
+            <span class="view-mode-toggles">
+              <button id="view-grid-btn" class="active"><i class="fa-solid fa-grip"></i></button>
+              <button id="view-list-btn"><i class="fa-solid fa-list"></i></button>
+            </span>
+          </div>
+
+          <div class="articles-grid" id="articles-grid">
+            <!-- Dynamic News Cards loaded here -->
+          </div>
+
+          <!-- Pagination / Load More -->
+          <div class="load-more-container">
+            <button id="load-more-btn" class="load-more-btn">
+              <span>Load More Stories</span>
+              <i class="fa-solid fa-arrow-down"></i>
+            </button>
+          </div>
+        </section>
+
+        <!-- Right 1-Column: AI Sidebar, Opinion, Trending & Editor's Desk -->
+        <aside class="editorial-sidebar">
+
+          <!-- AI Assistant Quick Box -->
+          <div class="sidebar-card ai-spotlight-card">
+            <div class="card-header">
+              <div class="badge-ai-glow"><i class="fa-solid fa-brain"></i> AI EDITORIAL SUITE</div>
+              <span class="model-tag">Live Intelligence</span>
+            </div>
+            <p class="ai-desc">Search any country or topic to get instant real-time live news cards and AI analytical summaries.</p>
+            <div class="ai-quick-input-wrap">
+              <input type="text" id="ai-quick-prompt" placeholder="Search: 'Pakistan news' or 'AI chips'... ">
+              <button id="btn-quick-ai-submit" title="Search via AI"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+            <div class="ai-quick-tags">
+              <span class="quick-chip" data-query="Cricket match live updates">🏏 Cricket Match</span>
+              <span class="quick-chip" data-query="Pakistan news">🇵🇰 Pakistan</span>
+              <span class="quick-chip" data-query="Saudi Arabia news">🇸🇦 Saudi Arabia</span>
+              <span class="quick-chip" data-query="United States breaking news">🇺🇸 USA</span>
+              <span class="quick-chip" data-query="Artificial Intelligence technology updates">🤖 AI & Tech</span>
+              <span class="quick-chip" data-query="Global financial markets and stocks">📈 Markets</span>
+            </div>
+          </div>
+
+          <!-- Trending Topics -->
+          <div class="sidebar-card">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-fire"></i> Trending Topics</h4>
+            </div>
+            <ol class="trending-list" id="trending-list">
+              <li>
+                <span class="rank">01</span>
+                <div class="trend-meta">
+                  <a href="#" class="trend-title" data-search="Pakistan">Pakistan Economic & Tech Initiatives</a>
+                  <span class="trend-reads">58.2k readers</span>
+                </div>
+              </li>
+              <li>
+                <span class="rank">02</span>
+                <div class="trend-meta">
+                  <a href="#" class="trend-title" data-search="Artificial Intelligence">Global Artificial Intelligence Advancements</a>
+                  <span class="trend-reads">52.4k readers</span>
+                </div>
+              </li>
+              <li>
+                <span class="rank">03</span>
+                <div class="trend-meta">
+                  <a href="#" class="trend-title" data-search="Saudi Arabia">Middle East Trade & Vision Accords</a>
+                  <span class="trend-reads">41.6k readers</span>
+                </div>
+              </li>
+              <li>
+                <span class="rank">04</span>
+                <div class="trend-meta">
+                  <a href="#" class="trend-title" data-search="Global Economy">Central Banks and Global Growth Projections</a>
+                  <span class="trend-reads">36.8k readers</span>
+                </div>
+              </li>
+              <li>
+                <span class="rank">05</span>
+                <div class="trend-meta">
+                  <a href="#" class="trend-title" data-search="Space Exploration">Commercial Space Exploration & James Webb</a>
+                  <span class="trend-reads">28.1k readers</span>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Awais Opinion Column -->
+          <div class="sidebar-card opinion-card">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-pen-nib"></i> Awais Editorial Desk</h4>
+            </div>
+            <div class="opinion-item">
+              <span class="opinion-author">Awais Editorial Board</span>
+              <h5 class="opinion-title">"The Era of Hyper-Fast Intelligence: Why Real-Time Verifiable Journalism Matters More Than Ever."</h5>
+              <p class="opinion-excerpt">As information volumes expand worldwide, newsrooms must harmonize speed with uncompromising verification.</p>
+              <button class="read-opinion-btn" id="btn-read-editorial">Read Analysis <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <!-- Newsletter Signup -->
+          <div class="sidebar-card newsletter-card">
+            <h4><i class="fa-solid fa-envelope-open-text"></i> Awais Daily Dispatch</h4>
+            <p>Get the morning briefing delivered straight to your inbox every dawn, distilled by our editorial intelligence.</p>
+            <form id="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to AwaisNews Daily Dispatch!');">
+              <input type="email" placeholder="Enter your email address" required>
+              <button type="submit" class="btn-sub">Subscribe Free</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Floating AI Assistant Button -->
+  <div class="floating-ai-launcher" id="floating-ai-launcher" title="Open AI Newsroom Chat & Live Search">
+    <div class="ai-launcher-inner">
+      <i class="fa-solid fa-robot"></i>
+      <span>News Chatbox</span>
+    </div>
+    <div class="ai-pulse-ring"></div>
+  </div>
+
+  <!-- AI Chatbot Drawer -->
+  <div class="ai-chat-drawer" id="ai-chat-drawer">
+    <div class="chat-header">
+      <div class="chat-title-wrap">
+        <div class="ai-avatar"><i class="fa-solid fa-brain"></i></div>
+        <div>
+          <h3>AwaisNews AI Newsroom</h3>
+          <span class="ai-status-indicator"><i class="fa-solid fa-circle" style="color: var(--accent-emerald); font-size: 0.6rem;"></i> Live Country & Topic News Search</span>
+        </div>
+      </div>
+      <div class="chat-actions">
+        <button id="btn-clear-chat" title="Clear Chat"><i class="fa-solid fa-trash-can"></i></button>
+        <button id="btn-close-chat" title="Close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <!-- Chat Quick Topics / Country Chips Bar -->
+    <div class="chat-quick-bar">
+      <span class="chat-chip" data-query="Cricket match live updates">🏏 Cricket Match</span>
+      <span class="chat-chip" data-query="Pakistan news">🇵🇰 Pakistan</span>
+      <span class="chat-chip" data-query="Saudi Arabia news">🇸🇦 Saudi Arabia</span>
+      <span class="chat-chip" data-query="USA breaking news">🇺🇸 USA</span>
+      <span class="chat-chip" data-query="UK news">🇬🇧 UK</span>
+      <span class="chat-chip" data-query="Turkey news">🇹🇷 Turkey</span>
+      <span class="chat-chip" data-query="AI and Technology news">🤖 AI Tech</span>
+      <span class="chat-chip" data-query="Stock market and economy news">📈 Markets</span>
+      <span class="chat-chip" data-query="World sports news">⚽ Sports</span>
+    </div>
+
+    <div class="chat-body" id="chat-messages">
+      <div class="chat-message bot">
+        <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+        <div class="msg-bubble">
+          <p><strong>👋 Welcome to AwaisNews Interactive AI Chatbox!</strong></p>
+          <p>You can search <strong>cricket matches</strong>, <strong>any country</strong> (e.g. <em>Pakistan, Turkey, USA, Saudi Arabia</em>) or <strong>topic</strong> here. I will instantly pull the latest verified news cards & editorial analysis for you in English or Urdu!</p>
+          <p style="margin-top: 8px; font-size: 0.82rem; color: var(--accent-gold);">💡 <em>Try typing "cricket match", "Pakistan news", or click any shortcut chip above!</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input-bar">
+      <textarea id="chat-user-input" rows="1" placeholder="Ask anything: 'cricket match', 'Pakistan news', 'AI tech'..."></textarea>
+      <button id="btn-send-chat" title="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- Article Reader Modal -->
+  <div class="modal-backdrop" id="article-modal">
+    <div class="modal-dialog article-dialog">
+      <button class="modal-close-btn" id="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="article-modal-content" id="article-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- AI Morning Digest Modal -->
+  <div class="modal-backdrop" id="digest-modal">
+    <div class="modal-dialog digest-dialog">
+      <button class="modal-close-btn" id="digest-close-btn"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="digest-modal-header">
+        <div class="digest-brand">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <div>
+            <h2>AwaisNews Executive Morning Briefing</h2>
+            <p>Synthesized Intelligence • <span id="digest-date">Today</span></p>
+          </div>
+        </div>
+        <div class="digest-actions">
+          <button id="btn-listen-digest" class="digest-btn"><i class="fa-solid fa-volume-high"></i> Listen Audio
+            Briefing</button>
+          <button id="btn-print-digest" class="digest-btn"><i class="fa-solid fa-print"></i> Print Edition</button>
+        </div>
+      </div>
+
+      <div class="digest-modal-body" id="digest-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Bookmarks Modal -->
+  <div class="modal-backdrop" id="bookmarks-modal">
+    <div class="modal-dialog bookmarks-dialog">
+      <button class="modal-close-btn" id="bookmarks-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="bookmarks-header">
+        <h3><i class="fa-solid fa-bookmark"></i> Saved Articles Library</h3>
+        <button id="btn-clear-bookmarks" class="danger-btn"><i class="fa-solid fa-trash-can"></i> Clear All</button>
+      </div>
+      <div class="bookmarks-body" id="bookmarks-list"></div>
+    </div>
+  </div>
+
+
+
+  <!-- Audio Player Floating Bar -->
+  <div class="audio-player-bar hidden" id="audio-player-bar">
+    <div class="container audio-inner">
+      <div class="audio-info">
+        <span class="audio-equalizer"><i class="fa-solid fa-waveform-lines fa-fade"></i></span>
+        <div class="audio-title-wrap">
+          <strong id="audio-now-playing">Playing Article Audio</strong>
+          <small>AwaisNews Text-To-Speech Reader</small>
+        </div>
+      </div>
+      <div class="audio-controls">
+        <button id="audio-btn-pause" title="Play/Pause"><i class="fa-solid fa-pause"></i></button>
+        <button id="audio-btn-stop" title="Stop"><i class="fa-solid fa-stop"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="newspaper-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <h2 class="footer-logo">AWAIS<span>NEWS</span></h2>
+          <p>Global journalism amplified by real-time intelligence. Delivering verified headlines, comprehensive
+            analytical reports, and intelligent editorial insights.</p>
+          <div class="social-links">
+            <a href="#" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Editorial Desks</h4>
+          <ul>
+            <li><a href="#" class="foot-cat" data-category="general">Front Page</a></li>
+            <li><a href="#" class="foot-cat" data-category="technology">Technology & AI</a></li>
+            <li><a href="#" class="foot-cat" data-category="business">Global Markets</a></li>
+            <li><a href="#" class="foot-cat" data-category="world">World Affairs</a></li>
+            <li><a href="#" class="foot-cat" data-category="science">Science & Space</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>AI Newsroom Features</h4>
+          <ul>
+            <li><a href="#" id="foot-open-briefing">Morning Briefing Digest</a></li>
+            <li><a href="#" id="foot-open-assistant">AI News Assistant</a></li>
+            <li><a href="#" id="foot-open-bookmarks">Saved Library</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>System Specs</h4>
+          <div class="spec-pills">
+            <span class="spec-pill"><i class="fa-solid fa-key"></i> NewsAPI: Active (4a600ef8...)</span>
+            <span class="spec-pill"><i class="fa-solid fa-shield-halved"></i> Verified Real-time</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="footer-year">2026</span> <strong>AwaisNews</strong>. All rights reserved. Real-Time Global Journalism.</p>
+        <p class="foot-sub">Designed with editorial elegance for discerning readers worldwide.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/ai-qwen.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
