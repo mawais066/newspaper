@@ -8,7 +8,7 @@ import time
 import datetime
 import requests
 import xml.etree.ElementTree as ET
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, send_file
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -94,13 +94,23 @@ COUNTRY_DATA = {
 
 @app.route("/")
 def index():
-    return send_from_directory(BASE_DIR, "index.html")
+    return send_file(os.path.join(BASE_DIR, "index.html"))
+
+@app.route("/healthz")
+@app.route("/ping")
+def healthz():
+    return jsonify({"status": "ok", "service": "awaisnews", "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()})
 
 @app.route("/<path:path>")
 def serve_static(path):
-    if os.path.exists(os.path.join(BASE_DIR, path)):
-        return send_from_directory(BASE_DIR, path)
-    return send_from_directory(BASE_DIR, "index.html")
+    file_path = os.path.join(BASE_DIR, path)
+    if os.path.isfile(file_path):
+        return send_file(file_path)
+    return send_file(os.path.join(BASE_DIR, "index.html"))
+
+@app.errorhandler(404)
+def handle_404(e):
+    return send_file(os.path.join(BASE_DIR, "index.html")), 200
 
 # -----------------------------------------------------------------------------
 # API ROUTES
