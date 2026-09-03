@@ -3,10 +3,12 @@ services:
     name: awaisnews
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
       - key: PORT
-        value: 8000
+        value: 10000
       - key: NEWS_API_KEY
         value: 4a600ef880d64ccdb16fdbacf568a1a3
       - key: AI_MODEL
